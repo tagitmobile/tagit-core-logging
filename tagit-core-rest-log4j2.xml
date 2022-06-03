@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is the default Log4J2 configuration for TagitCore Rest (Spring Boot) applications -->
+<!-- Configure this by adding `logging.config` property pointing to this file during start-up of a TagitCore Rest application -->
+<Configuration status="DEBUG">
+
+    <Properties>
+        <property name="LOGS_LOCATION" value="${env:LOGGING_DIR:-/layers/mobeix/logs}" />
+        <property name="LOGS_PATTERN" value="%d{yyyy:MM:dd HH:mm:ss,SSS} ($${spring:spring.application.name}) [%level][%X{userId}-%X{correlationId}][%logger{36}] %msg%n" />
+    </Properties>
+    
+	<Appenders>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT">
+			<PatternLayout pattern="${LOGS_PATTERN}" />
+		</Console>
+
+        <RollingFile name="FileAppender" fileName="${LOGS_LOCATION}/${spring:spring.application.name}.log" filePattern="${LOGS_LOCATION}/${spring:spring.application.name}/${spring:spring.application.name}-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout pattern="${LOGS_PATTERN}" />
+            <Policies>
+                <!-- rollover on startup, daily and when the file reaches 10 MegaBytes -->
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+
+	</Appenders>
+
+	<Loggers>
+		<AsyncLogger name="org.springframework" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.springframework.beans" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.springframework.context" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>		
+		<AsyncLogger name="org.springframework.web.servlet.mvc" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="springfox" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.hibernate" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.hibernate.id" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="ma.glasnost.orika" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.flywaydb" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="com.tagit" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="com.tagit" level="TRACE" additivity="false">
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="com.tagit.commons.core.web.rest.filter" level="TRACE" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="com.tagit.commons.core.boot.autoconfigure.env" level="TRACE" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
+		<Root level="INFO">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</Root>
+	</Loggers>
+</Configuration>
