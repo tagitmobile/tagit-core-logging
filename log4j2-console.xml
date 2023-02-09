@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is the default Log4J2 configuration for TagitCore Rest (Spring Boot) applications -->
+<!-- Configure this by adding `logging.config` property pointing to this file during start-up of a TagitCore Rest application -->
+<Configuration status="DEBUG">
+
+    <Properties>
+        <property name="LOGS_PATTERN" value="%d ($${spring:spring.application.name}) %p [%t][%X{userId}-%X{correlationId}][%logger] %encode{%msg} %n" />
+    </Properties>
+    
+	<Appenders>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT">
+			<PatternLayout pattern="${LOGS_PATTERN}" />
+		</Console>
+	</Appenders>
+
+	<Loggers>
+		<AsyncLogger name="org.springframework" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.springframework.beans" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.springframework.context" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>		
+		<AsyncLogger name="org.springframework.web.servlet.mvc" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="springfox" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.hibernate" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.hibernate.id" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="ma.glasnost.orika" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.flywaydb" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="com.mobeix" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="com.tagit" level="TRACE" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="com.tagit.commons.core.web.rest.filter" level="TRACE" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="com.tagit.commons.core.boot.autoconfigure.env" level="TRACE" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncRoot level="INFO">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncRoot>
+	</Loggers>
+</Configuration>
