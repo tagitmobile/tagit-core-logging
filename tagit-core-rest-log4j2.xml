@@ -5,7 +5,7 @@
 
     <Properties>
         <property name="LOGS_LOCATION" value="${env:LOGGING_DIR:-/layers/mobeix/logs}" />
-        <property name="LOGS_PATTERN" value="%d{yyyy:MM:dd HH:mm:ss,SSS} ($${spring:spring.application.name}) [%level][%t][%X{userId}-%X{correlationId}][%logger{36}] %msg%n" />
+        <property name="LOGS_PATTERN" value="%d ($${spring:spring.application.name}) %p [%t][%X{userId}-%X{correlationId}][%logger] %encode{%msg} %n" />
     </Properties>
     
 	<Appenders>
@@ -70,6 +70,10 @@
 			<AppenderRef ref="ConsoleAppender" />
 			<AppenderRef ref="FileAppender" />
 		</AsyncLogger>
+		<AsyncLogger name="com.mobeix" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="FileAppender" />
+		</AsyncLogger>
 		<AsyncLogger name="com.tagit" level="DEBUG" additivity="false">
 			<AppenderRef ref="ConsoleAppender" />
 		</AsyncLogger>
@@ -84,9 +88,9 @@
 			<AppenderRef ref="ConsoleAppender" />
 			<AppenderRef ref="FileAppender" />
 		</AsyncLogger>
-		<Root level="INFO">
+		<AsyncRoot level="INFO">
 			<AppenderRef ref="ConsoleAppender" />
 			<AppenderRef ref="FileAppender" />
-		</Root>
+		</AsyncRoot>
 	</Loggers>
 </Configuration>
