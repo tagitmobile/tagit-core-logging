@@ -4,7 +4,7 @@
 <Configuration status="DEBUG">
 
     <Properties>
-        <property name="LOGS_LOCATION" value="${env:LOGGING_DIR:-/layers/mobeix/logs}" />
+        <property name="LOGS_LOCATION" value="${env:LOGGING_DIR:-./logs}" />
         <property name="LOGS_PATTERN" value="%d ($${spring:spring.application.name}) %p [%t][%X{userId}-%X{correlationId}][%logger] %encode{%msg} %n" />
     </Properties>
     
@@ -27,39 +27,33 @@
 
 	<Loggers>
 		<AsyncLogger name="org.springframework" level="INFO" additivity="false">
-			<AppenderRef ref="ConsoleAppender" />
-			<AppenderRef ref="FileAppender" />
+			<AppenderRef ref="ConsoleAppender" level="INFO"/>
+			<AppenderRef ref="FileAppender" level="INFO"/>
 		</AsyncLogger>
 		<AsyncLogger name="org.springframework.beans" level="DEBUG" additivity="false">
-			<AppenderRef ref="ConsoleAppender" />
 			<AppenderRef ref="FileAppender" />
 		</AsyncLogger>
 		<AsyncLogger name="org.springframework.context" level="DEBUG" additivity="false">
-			<AppenderRef ref="ConsoleAppender" />
 			<AppenderRef ref="FileAppender" />
 		</AsyncLogger>		
 		<AsyncLogger name="org.springframework.web.servlet.mvc" level="DEBUG" additivity="false">
-			<AppenderRef ref="ConsoleAppender" />
 			<AppenderRef ref="FileAppender" />
 		</AsyncLogger>
 		<AsyncLogger name="springfox" level="INFO" additivity="false">
-			<AppenderRef ref="ConsoleAppender" />
-			<AppenderRef ref="FileAppender" />
+			<AppenderRef ref="ConsoleAppender"/>
+			<AppenderRef ref="FileAppender"/>
 		</AsyncLogger>
 		<AsyncLogger name="org.hibernate" level="INFO" additivity="false">
 			<AppenderRef ref="ConsoleAppender" />
 			<AppenderRef ref="FileAppender" />
 		</AsyncLogger>
 		<AsyncLogger name="org.hibernate.id" level="DEBUG" additivity="false">
-			<AppenderRef ref="ConsoleAppender" />
 			<AppenderRef ref="FileAppender" />
 		</AsyncLogger>
 		<AsyncLogger name="org.hibernate.SQL" level="DEBUG" additivity="false">
-			<AppenderRef ref="ConsoleAppender" />
 			<AppenderRef ref="FileAppender" />
 		</AsyncLogger>
 		<AsyncLogger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" additivity="false">
-			<AppenderRef ref="ConsoleAppender" />
 			<AppenderRef ref="FileAppender" />
 		</AsyncLogger>
 		<AsyncLogger name="ma.glasnost.orika" level="INFO" additivity="false">
@@ -71,14 +65,12 @@
 			<AppenderRef ref="FileAppender" />
 		</AsyncLogger>
 		<AsyncLogger name="com.mobeix" level="DEBUG" additivity="false">
-			<AppenderRef ref="ConsoleAppender" />
-			<AppenderRef ref="FileAppender" />
-		</AsyncLogger>
-		<AsyncLogger name="com.tagit" level="DEBUG" additivity="false">
-			<AppenderRef ref="ConsoleAppender" />
+			<AppenderRef ref="ConsoleAppender" level="DEBUG"/>
+			<AppenderRef ref="FileAppender" level="TRACE"/>
 		</AsyncLogger>
 		<AsyncLogger name="com.tagit" level="TRACE" additivity="false">
-			<AppenderRef ref="FileAppender" />
+			<AppenderRef ref="ConsoleAppender" level="DEBUG"/>
+			<AppenderRef ref="FileAppender" level="TRACE"/>
 		</AsyncLogger>
 		<AsyncLogger name="com.tagit.commons.core.web.rest.filter" level="TRACE" additivity="false">
 			<AppenderRef ref="ConsoleAppender" />
