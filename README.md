@@ -7,7 +7,7 @@ The repository for sharing the default logging and samples for each version.
 
 As of Mobeix 7.4 onwards, TagitCore is bundled with the Mobeix Logger library. For more information on how the TagitCore Logging System works with the Mobeix Logger, please refer to [Application Logging Configuration - Partner - Product - Development Guidelines - Confluence (tagitmobile.com)](https://edocs1.tagitmobile.com/confluence/pages/viewpage.action?spaceKey=PPDG&title=Application+Logging+Configuration).
 
-## Mobeix Logging Properties
+# Mobeix Logging Properties
 
 Here is a reference sample properties for configuring the Mobeix Logger. 
 
@@ -31,8 +31,13 @@ mxlogger.location=/layers/mobeix/logs/<application-name>
 
 #### [log4j2-test.xml](/log4j2-test.xml)
 
-The **ONLY** Log4J configuration file that must be present in the classpath for the Tagit Core Logging System to work. 
+The **ONLY** Log4J configuration file that must be present in the classpath for the Tagit Core Logging System to work. Delete all other log4j2 configuration files in the classpath.
 
-> **Technology Upgrade**
+> **Shared Tomcat Deployment**
+>
+> When deploying an application using TagitCore Logging System and Mobeix Logger in a shared Tomcat (more than one WAR in the Tomcat webapps folder), the other WARs must NOT have `log4j-spring-boot.jar` library. Otherwise, there will be a class loading conflict in the way the applications override the Log4J and Spring Logging System.
+
+> **Technology Upgrade Story**
 >
 > [[DBP-18871] <COMPONENT API/ADM> Mobeix 7.5 Technology Upgrade Template: Ensure mxlogger is working and configurable - JIRA (tagitmobile.com)](https://jira.tagitmobile.com/browse/DBP-18871)
+
