@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration name="TagitCore v7.5.0 Log4J2 Base Configuration" status="DEBUG" verbose="true">
+
+    <Properties>
+		<property name="LOGS_PATTERN" value="%d %p [%t][%X{userId}-%X{correlationId}][%logger] %msg %n" />
+    </Properties>
+    
+	<Appenders>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT">
+			<PatternLayout pattern="${LOGS_PATTERN}" />
+		</Console>
+	</Appenders>
+
+	<Loggers>
+		<!-- Spring Framework -->
+		<AsyncLogger name="org.springframework" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.springframework.beans" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.springframework.context" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<!-- Hibernate ORM -->
+		<AsyncLogger name="org.hibernate" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.hibernate.id" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<!-- [rj.added 2023.05.17] Hibernate 6 SQL Logging -->
+		<AsyncLogger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.hibernate.orm.jdbc.bind" level="TRACE" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<!-- [rj.added 2023.05.17] Hibernate 6 Slow Queries -->
+		<AsyncLogger name="org.hibernate.SQL_SLOW" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<!-- Utilities -->
+		<AsyncLogger name="ma.glasnost.orika" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.flywaydb" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<!-- API Documentation -->
+		<AsyncLogger name="springfox" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+		<AsyncLogger name="org.springdoc" level="INFO" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>
+
+		<!-- ========================================================================= -->
+		<!-- Mobeix Loggers -->
+		<!-- ========================================================================= -->
+		<!-- Tagit -->
+		<AsyncLogger name="com.tagit" level="DEBUG" additivity="false">
+			<!-- <AppenderRef ref="Sanitizer" />-->
+   		    <AppenderRef ref="ConsoleAppender" /> 
+		</AsyncLogger>
+		<AsyncLogger name="com.mobeix" level="DEBUG" additivity="false">
+			<!-- <AppenderRef ref="Sanitizer" />-->
+   		    <AppenderRef ref="ConsoleAppender" /> 
+		</AsyncLogger>
+		<AsyncLogger name="com.tagit.commons.core.boot.autoconfigure.env" level="TRACE" additivity="false">
+			<AppenderRef ref="ConsoleAppender" />
+		</AsyncLogger>		
+
+		<!-- ========================================================================= -->
+		<!-- MDB Loggers -->
+		<!-- ========================================================================= -->
+
+		<!-- ========================================================================= -->
+		<!-- Custom Loggers -->
+		<!-- ========================================================================= -->
+		<!-- Place Application-Specific or Custom Properties here -->
+
+
+		<!-- ========================================================================= -->
+		<!-- Root Loggers -->
+		<!-- ========================================================================= -->
+		<AsyncRoot level="DEBUG">
+			<!-- <AppenderRef ref="Sanitizer" />-->
+   		    <AppenderRef ref="ConsoleAppender" /> 
+			<!-- Sync Logging Appender <AppenderRef ref="Console"/> -->
+		</AsyncRoot>
+
+	</Loggers>
+</Configuration>
